@@ -50,7 +50,16 @@ function Previous() {
         .then(res => res.json())
         .then(data => {
             let news = data.articles
-            console.log(news[count])
+            let persons = news[count]
+            let newsArticle = `<div class = col-lg-5 col-md-6><img style = "width: 500px" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
+            <div class = "col-lg-7 mt-5">
+             <p><strong>Name: </strong>${persons.author}</p>
+             <p><strong>Title: </strong>${persons.title}</p>
+             <p><strong>Description: </strong>${persons.description}</p>
+             <p><strong>Content: </strong>${persons.content}</p>
+            </div>`
+            document.querySelector('.news').innerHTML = newsArticle
+    
         })
     } else {
         count = 1
