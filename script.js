@@ -35,6 +35,7 @@ function Next() {
          <p><strong>Title: </strong>${persons.title}</p>
          <p><strong>Description: </strong>${persons.description}</p>
          <p><strong>Content: </strong>${persons.content}</p>
+         <p><strong>Read more: </strong><a href =${persons.url} target="blank">Click here</a></p>
         </div>`
         document.querySelector('.news').innerHTML = newsArticle
 
