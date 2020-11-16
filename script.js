@@ -29,7 +29,7 @@ function Next() {
     .then(data => {
         let news = data.articles
         let persons = news[count]
-        let newsArticle = `<div class = col-lg-5 col-md-6><img style = "width: 500px" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
+        let newsArticle = `<div class = "col-lg-5 pl-4"><img class="img-fluid" style = "width: 28rem; height: 400px;" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
         <div class = "col-lg-7 mt-5">
          <p><strong>Name: </strong>${persons.author}</p>
          <p><strong>Title: </strong>${persons.title}</p>
@@ -51,7 +51,7 @@ function Previous() {
         .then(data => {
             let news = data.articles
             let persons = news[count]
-            let newsArticle = `<div class = col-lg-5 col-md-6><img style = "width: 500px" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
+            let newsArticle = `<div class = "col-lg-5 pl-4"><img class="img-fluid" style = "width: 28rem; height: 400px;" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
             <div class = "col-lg-7 mt-5">
              <p><strong>Name: </strong>${persons.author}</p>
              <p><strong>Title: </strong>${persons.title}</p>
@@ -69,15 +69,3 @@ function Previous() {
 Previous()
 
 
-
-
-
-
-
-// function name(count) {
-//     fetch('https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&page=1')
-//     .then(res => res.json())
-//     .then(data => {
-//         console.log(data)
-//     })
-// }
