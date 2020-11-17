@@ -6,25 +6,39 @@ let count = 0
 function Next() {
     count ++
     const page= `page=${count}`
-    //console.log(page)
     const webapi = fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&${page}`)
     .then(res => res.json())
     .then(data => {
-
+        //console.log(data.articles[id])
+        document.querySelector('ul').addEventListener("click", e => {
+            if (e.target && e.target.nodeName == "LI"){
+                //console.log(e.target.id + " " +"clicked")
+                let persons = data.articles[e.target.id]
+                //console.log(persons)
+                let newsArticle = `<div class = "col-lg-5 col-md-12 pl-4"><img class="img-fluid text-center" style = "width: 28rem; height: 400px;" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
+                <div class = "col-lg-7 mt-5">
+                 <p><strong>Name: </strong>${persons.author}</p>
+                 <p><strong>Title: </strong>${persons.title}</p>
+                 <p><strong>Description: </strong>${persons.description}</p>
+                 <p><strong>Content: </strong>${persons.content}</p>
+                 <p><strong>Read more: </strong><a href =${persons.url} target="blank">Click here</a></p>
+                </div>`
+                document.querySelector('.news').innerHTML = newsArticle;
+            }
+        })
         if (webapi){
             document.querySelector('.loading').style.display = "none"
         }
-        //console.log(data)
         let datas = data.articles
         let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
         let output = ""
-        datas.forEach(data => {
-            output +=`<li id = ${count} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
+        datas.forEach((data, index) => {
+            output +=`<li id = ${index} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
         });
         document.querySelector('.output').innerHTML = output;
         document.querySelector('.heading').innerHTML = heading;
-        
     })
+    
 }
 Next()
 
@@ -37,7 +51,6 @@ function Previous() {
     if (count > 1){
         count --
         const page= `page=${count}`
-        //console.log(page)
         const webapi = fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&${page}`)
         .then(res => res.json())
         .then(data => {
@@ -45,12 +58,11 @@ function Previous() {
             if (webapi){
                 document.querySelector('.loading').style.display = "none"
             }
-            //console.log(data)
             let datas = data.articles
             let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
             let output = ""
-            datas.forEach(data => {
-                output += `<li id = ${count} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
+            datas.forEach((data, index) => {
+                output += `<li id = ${index} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
             });
             document.querySelector('.output').innerHTML = output;
             document.querySelector('.heading').innerHTML = heading;
@@ -66,12 +78,11 @@ Previous()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const ul = document.querySelector('ul');
-ul.addEventListener("click", e => {
-    if (e.target && e.target.nodeName == "LI"){
-        console.log(e.target.id + " " +"clicked")
-    }
-})
+// document.querySelector('ul').addEventListener("click", e => {
+//     if (e.target && e.target.nodeName == "LI"){
+//         console.log(e.target.id + " " +"clicked")
+//     }
+// })
 
 
 // function webApi(){
