@@ -23,6 +23,9 @@
     color: aliceblue;
     padding-top: 20px;
 }
+li {
+    cursor: pointer;
+}
 
 .loading, .btnloader {
     border: 10px solid rgba(103, 128, 159, 0);

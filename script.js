@@ -19,9 +19,7 @@ function Next() {
         let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
         let output = ""
         datas.forEach(data => {
-            output += `<ul class= "list-group m-4" style="width: 100%;">
-                <li class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>
-            </ul>`
+            output +=`<li id = ${count} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
         });
         document.querySelector('.output').innerHTML = output;
         document.querySelector('.heading').innerHTML = heading;
@@ -31,6 +29,7 @@ function Next() {
 Next()
 
 ////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 document.querySelector('.prev').addEventListener("click",Previous);
@@ -51,9 +50,7 @@ function Previous() {
             let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
             let output = ""
             datas.forEach(data => {
-                output += `<ul class= "list-group m-4" style="width: 100%;">
-                    <li class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>
-                </ul>`
+                output += `<li id = ${count} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
             });
             document.querySelector('.output').innerHTML = output;
             document.querySelector('.heading').innerHTML = heading;
@@ -65,6 +62,16 @@ function Previous() {
   
 }
 Previous()
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const ul = document.querySelector('ul');
+ul.addEventListener("click", e => {
+    if (e.target && e.target.nodeName == "LI"){
+        console.log(e.target.id + " " +"clicked")
+    }
+})
 
 
 // function webApi(){
