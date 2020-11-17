@@ -30,7 +30,7 @@ webApi()
 /////////////////////////////////////////////////////////
 
 document.querySelector('.next').addEventListener("click", Next);
-let count = 0
+let count = -1
 function Next() {
     count ++
     const oneapi = fetch('https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&page=1')
@@ -62,7 +62,7 @@ Next()
 
 document.querySelector('.prev').addEventListener("click",Previous);
 function Previous() {
-    if (count > 1){
+    if (count >= 1){
         count --
         const oneapi = fetch('https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&page=1')
         .then(res => res.json())
@@ -79,12 +79,13 @@ function Previous() {
              <p><strong>Title: </strong>${persons.title}</p>
              <p><strong>Description: </strong>${persons.description}</p>
              <p><strong>Content: </strong>${persons.content}</p>
+             <p><strong>Read more: </strong><a href =${persons.url} target="blank">Click here</a></p>
             </div>`
             document.querySelector('.news').innerHTML = newsArticle
     
         })
     } else {
-        count = 1
+        count = 0
     }
   
 }
