@@ -15,6 +15,9 @@ function Next() {
                 //console.log(e.target.id + " " +"clicked")
                 let persons = data.articles[e.target.id]
                 //console.log(persons)
+                if (persons){
+                    document.querySelector('.loading').style.display = "none"
+                }
                 let newsArticle = `<div class = "col-lg-5 col-md-12 pl-4"><img class="img-fluid text-center" style = "width: 28rem; height: 400px;" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
                 <div class = "col-lg-7 mt-5">
                  <p><strong>Name: </strong>${persons.author}</p>
@@ -54,6 +57,26 @@ function Previous() {
         const webapi = fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&${page}`)
         .then(res => res.json())
         .then(data => {
+
+            document.querySelector('ul').addEventListener("click", e => {
+                if (e.target && e.target.nodeName == "LI"){
+                    //console.log(e.target.id + " " +"clicked")
+                    let persons = data.articles[e.target.id]
+                    //console.log(persons)
+                    if (persons){
+                        document.querySelector('.loading').style.display = "none"
+                    }
+                    let newsArticle = `<div class = "col-lg-5 col-md-12 pl-4"><img class="img-fluid text-center" style = "width: 28rem; height: 400px;" src ="${persons.urlToImage}" alt = ${persons.author}/></div>
+                    <div class = "col-lg-7 mt-5">
+                     <p><strong>Name: </strong>${persons.author}</p>
+                     <p><strong>Title: </strong>${persons.title}</p>
+                     <p><strong>Description: </strong>${persons.description}</p>
+                     <p><strong>Content: </strong>${persons.content}</p>
+                     <p><strong>Read more: </strong><a href =${persons.url} target="blank">Click here</a></p>
+                    </div>`
+                    document.querySelector('.news').innerHTML = newsArticle;
+                }
+            })
     
             if (webapi){
                 document.querySelector('.loading').style.display = "none"
