@@ -9,6 +9,18 @@ function Next() {
     const webapi = fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&${page}`)
     .then(res => res.json())
     .then(data => {
+        if (webapi){
+            document.querySelector('.loading').style.display = "none"
+        }
+        let datas = data.articles
+        let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
+        let output = ""
+        datas.forEach((data, index) => {
+            output +=`<li id = ${index} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
+        });
+        document.querySelector('.output').innerHTML = output;
+        document.querySelector('.heading').innerHTML = heading;
+
         document.querySelector('ul').addEventListener("click", e => {
             if (e.target && e.target.nodeName == "LI"){
                 let persons = data.articles[e.target.id]
@@ -26,25 +38,15 @@ function Next() {
                 document.querySelector('.news').innerHTML = newsArticle;
             }
         })
-        if (webapi){
-            document.querySelector('.loading').style.display = "none"
-        }
-        let datas = data.articles
-        let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
-        let output = ""
-        datas.forEach((data, index) => {
-            output +=`<li id = ${index} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
-        });
-        document.querySelector('.output').innerHTML = output;
-        document.querySelector('.heading').innerHTML = heading;
     })
     
 }
 Next()
 
-////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+// PREVIOUS CODE //////////////////////////////////////////////////////////////////////////////////////
 
 document.querySelector('.prev').addEventListener("click",Previous);
 function Previous() {
@@ -54,6 +56,17 @@ function Previous() {
         const webapi = fetch(`https://newsapi.org/v2/everything?q=bitcoin&apiKey=bc6dde98f0564ae8885cde0960b424f3&${page}`)
         .then(res => res.json())
         .then(data => {
+            if (webapi){
+                document.querySelector('.loading').style.display = "none"
+            }
+            let datas = data.articles
+            let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
+            let output = ""
+            datas.forEach((data, index) => {
+                output += `<li id = ${index} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
+            });
+            document.querySelector('.output').innerHTML = output;
+            document.querySelector('.heading').innerHTML = heading;
 
             document.querySelector('ul').addEventListener("click", e => {
                 if (e.target && e.target.nodeName == "LI"){
@@ -73,17 +86,6 @@ function Previous() {
                 }
             })
     
-            if (webapi){
-                document.querySelector('.loading').style.display = "none"
-            }
-            let datas = data.articles
-            let heading = `<h1 class="jumbotron display-4 text-center">Top News page ${count}</h1>`;
-            let output = ""
-            datas.forEach((data, index) => {
-                output += `<li id = ${index} class= "list-group-item"> <strong>Headline:</strong> ${data.title} <br><br> <strong>Story:</strong> ${data.description}</li>`
-            });
-            document.querySelector('.output').innerHTML = output;
-            document.querySelector('.heading').innerHTML = heading;
             
         })
     } else {
